@@ -34,6 +34,9 @@ public class LonelyTwitterActivity extends Activity {
 	 */
 	private GoogleApiClient client;
 
+	private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
+
+	private ArrayAdapter<Tweet> adapter;
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -53,23 +56,20 @@ public class LonelyTwitterActivity extends Activity {
 				String text = bodyText.getText().toString();
 
 				Tweet newTweet = new NormalTweet(text);
-				try {
-					newTweet.setMessage("This is a tweet");
-				} catch (TweetTooLongException e) {
-					e.printStackTrace();
-				}
-				ImportantTweet newestImportantTweet = new ImportantTweet(text);
-				newestImportantTweet.getMessage();
-				newestImportantTweet.isImportant();
 
+//				ImportantTweet newestImportantTweet = new ImportantTweet(text);
+//				newestImportantTweet.getMessage();
+//				newestImportantTweet.isImportant();
+//
 				String test = newTweet.getMessage();
 
 				ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
 				tweetList.add(newTweet);
-				tweetList.add(newestImportantTweet);
+//				tweetList.add(newestImportantTweet);
+				adapter.notifyDataSetChanged();
 
-				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
+//				saveInFile(text, new Date(System.currentTimeMillis()));
+//				finish();
 
 			}
 		});
@@ -84,24 +84,27 @@ public class LonelyTwitterActivity extends Activity {
 		super.onStart();
 		// ATTENTION: This was auto-generated to implement the App Indexing API.
 		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		client.connect();
-		String[] tweets = loadFromFile();
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				R.layout.list_item, tweets);
+//		client.connect();
+//		String[] tweets = loadFromFile();
+//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+//				R.layout.list_item, tweets);
+//		oldTweetsList.setAdapter(adapter);
+//		// ATTENTION: This was auto-generated to implement the App Indexing API.
+//		// See https://g.co/AppIndexing/AndroidStudio for more information.
+//		Action viewAction = Action.newAction(
+//				Action.TYPE_VIEW, // TODO: choose an action type.
+//				"LonelyTwitter Page", // TODO: Define a title for the content shown.
+//				// TODO: If you have web page content that matches this app activity's content,
+//				// make sure this auto-generated web page URL is correct.
+//				// Otherwise, set the URL to null.
+//				Uri.parse("http://host/path"),
+//				// TODO: Make sure this auto-generated app deep link URI is correct.
+//				Uri.parse("android-app://ca.ualberta.cs.lonelytwitter/http/host/path")
+//		);
+//		AppIndex.AppIndexApi.start(client, viewAction);
+		adapter = new ArrayAdapter<Tweet>(this,
+				R.layout.list_item, tweetList);
 		oldTweetsList.setAdapter(adapter);
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		Action viewAction = Action.newAction(
-				Action.TYPE_VIEW, // TODO: choose an action type.
-				"LonelyTwitter Page", // TODO: Define a title for the content shown.
-				// TODO: If you have web page content that matches this app activity's content,
-				// make sure this auto-generated web page URL is correct.
-				// Otherwise, set the URL to null.
-				Uri.parse("http://host/path"),
-				// TODO: Make sure this auto-generated app deep link URI is correct.
-				Uri.parse("android-app://ca.ualberta.cs.lonelytwitter/http/host/path")
-		);
-		AppIndex.AppIndexApi.start(client, viewAction);
 	}
 
 	private String[] loadFromFile() {
@@ -141,23 +144,23 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
-	@Override
-	public void onStop() {
-		super.onStop();
-
-		// ATTENTION: This was auto-generated to implement the App Indexing API.
-		// See https://g.co/AppIndexing/AndroidStudio for more information.
-		Action viewAction = Action.newAction(
-				Action.TYPE_VIEW, // TODO: choose an action type.
-				"LonelyTwitter Page", // TODO: Define a title for the content shown.
-				// TODO: If you have web page content that matches this app activity's content,
-				// make sure this auto-generated web page URL is correct.
-				// Otherwise, set the URL to null.
-				Uri.parse("http://host/path"),
-				// TODO: Make sure this auto-generated app deep link URI is correct.
-				Uri.parse("android-app://ca.ualberta.cs.lonelytwitter/http/host/path")
-		);
-		AppIndex.AppIndexApi.end(client, viewAction);
-		client.disconnect();
-	}
+//	@Override
+//	public void onStop() {
+//		super.onStop();
+//
+//		// ATTENTION: This was auto-generated to implement the App Indexing API.
+//		// See https://g.co/AppIndexing/AndroidStudio for more information.
+//		Action viewAction = Action.newAction(
+//				Action.TYPE_VIEW, // TODO: choose an action type.
+//				"LonelyTwitter Page", // TODO: Define a title for the content shown.
+//				// TODO: If you have web page content that matches this app activity's content,
+//				// make sure this auto-generated web page URL is correct.
+//				// Otherwise, set the URL to null.
+//				Uri.parse("http://host/path"),
+//				// TODO: Make sure this auto-generated app deep link URI is correct.
+//				Uri.parse("android-app://ca.ualberta.cs.lonelytwitter/http/host/path")
+//		);
+//		AppIndex.AppIndexApi.end(client, viewAction);
+//		client.disconnect();
+//	}
 }
