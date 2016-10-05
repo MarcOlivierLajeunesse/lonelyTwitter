@@ -1,3 +1,10 @@
+/*
+Copyright (c)2016 Team 20, CMPUT301, University of Alberta - All Rights Reserved
+You may use, distribute, and copy all or parts of this code under terms and conditions of
+University of Alberta and the Code of Student Behavior.
+You can find the copy of license at http://www.github/.....
+For further information, contact me at email@email.ca
+* */
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -21,8 +28,33 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
+/**
+ * This is the main view class of LonelyTwitter project. <p> It handles all
+ * user interactions as well as file manipulations. </p>
+ * <pre> All the files are stored in the form of "json". Files stored in Emulator,
+ * accessible from    device monitor. </pre>
+ * <code> Pseudo code sample:
+ * open someFile       <br>
+ * attach some text...    <br>
+ * close the file     <br>
+ * </code>
+ * <ul>
+ *     <li>item</li>
+ *     <li>another item</li>
+ *     <li>some other item</li>
+ * </ul>
+ * @since 1.0
+ * @see NormalTweet
+ * @author Marc-Olivier Lajeunesse
+ * */
 public class LonelyTwitterActivity extends Activity {
+
+	/**
+	 * This is the fie name that is being saved / loaded and contains all the tweets.
+	 * @see #loadFromFile()
+	 * @see #saveInFile()
+	 *
+	 * */
 
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
@@ -79,6 +111,9 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * This method loads the tweets from FILE_NAME (file.save) into tweetList array list
+	 */
 	private void loadFromFile() {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
@@ -96,7 +131,10 @@ public class LonelyTwitterActivity extends Activity {
 			tweetList = new ArrayList<Tweet>();
 		}
 	}
-	
+
+	/**
+	 * This method opens the file FILE_NAME (file.sav), inserts the tweetList array list, and then closes the file
+	 */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
