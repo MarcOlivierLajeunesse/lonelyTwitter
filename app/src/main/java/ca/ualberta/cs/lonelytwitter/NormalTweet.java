@@ -1,5 +1,6 @@
 package ca.ualberta.cs.lonelytwitter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  * @see ImportantTweet
  * @see #isImportant()
  */
-public class NormalTweet extends Tweet implements Tweetable {
+public class NormalTweet extends Tweet implements Tweetable, Serializable {
     /**
      * this constructor makes the normal tweet object.
      * @param message this parameter is the string for the tweet.

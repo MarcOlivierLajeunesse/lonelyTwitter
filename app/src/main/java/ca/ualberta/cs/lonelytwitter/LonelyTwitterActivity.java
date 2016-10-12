@@ -15,12 +15,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,6 +59,7 @@ public class LonelyTwitterActivity extends Activity {
 	 *
 	 * */
 
+	private Activity activity = this;
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
@@ -63,6 +67,10 @@ public class LonelyTwitterActivity extends Activity {
 	private ArrayList<Tweet> tweetList = new ArrayList<Tweet>();
 
 	private ArrayAdapter<Tweet> adapter;
+
+	public ListView getOldTweetsList(){
+		return oldTweetsList;
+	}
 
 	/** Called when the activity is first created. */
 	@Override
@@ -96,10 +104,25 @@ public class LonelyTwitterActivity extends Activity {
 			public void onClick(View v) {
 				setResult(RESULT_OK);
 				tweetList.clear();
-                adapter.notifyDataSetChanged();
+				adapter.notifyDataSetChanged();
 				saveInFile();
 			}
 		});
+
+
+		oldTweetsList.setOnItemClickListener(new
+				AdapterView.OnItemClickListener(){
+					public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+						Intent intent = new Intent(activity , EditTweetActivity.class);
+//						intent.putExtra("selectedTweet", (Serializable) adapter.getItem((int) id));
+						Tweet selectedTweet = tweetList.get((int) id);
+//						intent.putExtra("selectedTweet", (Serializable) tweetList.get((int) id));
+						intent.putExtra("selectedTweet", tweetList.get((int) id).getMessage());
+//						intent.putExtra("selectedTweet", tweetList.get((int) id).toString());
+						startActivity(intent);
+					}
+				});
+
 	}
 
 	@Override
